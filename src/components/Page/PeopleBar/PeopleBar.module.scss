@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text {
+  font-family: AppFontRegular;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: rgba(#FFFFFF, 0.9);
+}
+
+.icon {
+  fill: #FFFF;
+  margin-right: 9px;
+}

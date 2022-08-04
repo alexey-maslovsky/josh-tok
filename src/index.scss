@@ -1,0 +1,16 @@
+:root, body {
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background-color: black;
+}
+
+@font-face {
+  font-family: 'AppFontRegular';
+  src: local('ProximaNova-Regular'), url('./static/fonts/ProximaNova-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
