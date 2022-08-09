@@ -63,6 +63,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       videoRef.current?.pause();
     } else {
       videoRef.current?.play();
+      videoRef.current!.volume = 0.5;
     }
   };
 
@@ -71,13 +72,11 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       return;
     }
 
-    if (active && inView) {
-      videoRef.current.play();
-    } else {
+    if (!active) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
-  }, [active, inView]);
+  }, [active]);
 
   const handleShare = () => {
     if (!showCopyToaster && copy(window.location.href)) {
@@ -136,7 +135,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
 
         <div className={styles.infoPanel}>
           <div className={styles.author}>@satellite_family</div>
-          <div className={styles.description}>{data.tags.map((x) => `#${x}`).join(' ')}</div>
+          <div className={styles.description}>{data.tags.map((x) => `${x}`).join(' ')}</div>
           <PeopleBar>{data.names.join(' ')}</PeopleBar>
         </div>
 
