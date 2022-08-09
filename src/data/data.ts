@@ -55,16 +55,60 @@ const getComments = (id: string) => {
 
 const VIDEOS: Record<string, { src: string, names: string[] }> = {
   [`1`]: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-man-runs-past-ground-level-shot-32809-large.mp4',
-    names: ['Alex Maslovsky', 'Josh Aowqeid', 'Brad ASdoasdj'],
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/-8333190523638727549.mp4',
+    names: ['Yana Aleksandrovich', 'Katerina Zaitsava'],
   },
   [`2`]: {
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-man-dancing-under-changing-lights-1240-large.mp4',
-    names: ['QQQQ Maslovsky', '@@@ Aowqeid', 'BBBB ASdoasdj'],
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/alina_josh.mp4',
+    names: ['Alina Klokel'],
   },
   [`3`]: {
-    src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    names: ['Aqwewq Maslovsky', 'Josh Aowqeid', 'Brad ASdoasdj'],
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/CS.mp4',\
+    names: ['Nadya Tuleyko'],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/export_1659626997860.mp4',
+    names: ['Alina Chertkova', 'Kate Senkevich', 'Vlada Rudko'],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/HB.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_1801.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_4982.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_5792.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_7232.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_E0595.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/Josh.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/petal_20220804_231143.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/VID_20220805_104603.mp4',
+    names: [],
+  },
+  [`3`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/WCteam1.mp4',
+    names: [],
   },
 };
 
