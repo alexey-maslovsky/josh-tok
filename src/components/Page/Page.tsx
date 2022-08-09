@@ -1,4 +1,3 @@
-import { useWindowSize } from '@react-hook/window-size';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
@@ -12,6 +11,7 @@ import useCombinedRefs from '../../hooks/useCombinedRefs';
 import Portal from '../Portal';
 import styles from './Page.module.scss';
 import copy from 'copy-to-clipboard';
+import useWindowSize from '../../hooks/useWindowSize';
 
 interface PageProps {
   active: boolean;
@@ -40,7 +40,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   onTouchStart,
   className,
 }, ref) => {
-  const [windowWidth, windowHeight] = useWindowSize();
+  const { width, height } = useWindowSize();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showCopyToaster, setShowCopyToaster] = useState(false);
   const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
@@ -134,7 +134,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
           controls={false}
           playsInline
           preload="auto"
-          style={{ width: windowWidth, height: windowHeight, objectFit: 'fill' }}
+          style={{ width, height, objectFit: 'fill' }}
           key={data.id}
           onClick={handlePlay}
         />
@@ -180,7 +180,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      style={{ height: `${windowHeight}px` }}
+      style={{ height: `${height}px` }}
     >
       {inView && <Portal>
         <div className={styles.videoBackground}>
@@ -192,7 +192,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
             controls={false}
             playsInline
             preload="auto"
-            style={{ width: windowWidth, height: windowHeight, objectFit: 'fill' }}
+            style={{ width: width, height: height, objectFit: 'fill' }}
             key={data.id}
           />
         </div>
