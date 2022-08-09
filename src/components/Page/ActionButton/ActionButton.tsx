@@ -11,6 +11,7 @@ interface ActionButtonProps {
   className?: string;
   type: ActionButtonType;
   children: string;
+  active?: boolean;
   onClick?: () => void;
 }
 
@@ -18,13 +19,24 @@ const ActionButton: FC<ActionButtonProps> = ({
   className,
   type,
   children,
+  active = false,
   onClick,
 }) => {
+  let Icon = type === 'like' ? LikeIcon : type === 'share' ? ShareIcon : CommentIcon;
+
   return (
-    <div className={clsx(styles.container, className)}>
-      {type === 'like' && <LikeIcon className={styles.icon} onClick={onClick} />}
-      {type === 'share' && <ShareIcon className={styles.icon} onClick={onClick} />}
-      {type === 'comment' && <CommentIcon className={styles.icon} onClick={onClick} />}
+    <div className={clsx(styles.container, className, active && styles.active)}>
+      <Icon
+        className={styles.icon}
+        {...(onClick
+          ? {
+              onClick: (e) => {
+                e.stopPropagation();
+                onClick?.();
+              },
+            }
+          : {})}
+      />
       <div className={styles.text}>{children}</div>
     </div>
   );

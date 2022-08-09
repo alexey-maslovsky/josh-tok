@@ -19,6 +19,12 @@ interface PageProps {
   className?: string;
 }
 
+const getIsLikedKey = (id: string) => `${id}/liked`;
+const getIsVideoLiked = (id: string) => localStorage.getItem(getIsLikedKey(id)) === 'true';
+
+const getCommentsKey = (id: string) => `${id}/comments`;
+const getLocalComments = (id: string) => parseInt(localStorage.getItem(getCommentsKey(id)) || '', 10) || 0;
+
 const Page = forwardRef<HTMLDivElement, PageProps>(({
   active,
   preload,
@@ -31,6 +37,8 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [windowWidth, windowHeight] = useWindowSize();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showCopyToaster, setShowCopyToaster] = useState(false);
+  const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
+  const [localComments, setLocalComments] = useState(getLocalComments(data.id));
 
   const handlePlay = () => {
     if (!videoRef.current) {
@@ -64,6 +72,22 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     }
   };
 
+  const updateIsLiked = (videoId: string) => {
+    localStorage.setItem(
+      getIsLikedKey(videoId),
+      String(!isLiked)
+    );
+    setLiked(!isLiked);
+  }
+
+  const updateLocalComments = (videoId: string) => {
+    localStorage.setItem(
+      getCommentsKey(videoId),
+      String(localComments + 1)
+    );
+    setLocalComments(localComments + 1);
+  }
+
   const renderContent = () => {
     return (
       <>
@@ -82,8 +106,14 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
 
         <div className={styles.actionBar}>
           <Avatar src={SatelliteFamilyIconSrc} className={styles.avatar} />
-          <ActionButton type="like">3612</ActionButton>
-          <ActionButton type="comment">54</ActionButton>
+          <ActionButton
+            type='like'
+            active={isLiked}
+            onClick={() => updateIsLiked(data.id)}
+          >
+            {String(data.likes + (isLiked ? 1 : 0))}
+          </ActionButton>
+          <ActionButton type="comment" onClick={() => updateLocalComments(data.id)}>{String(data.comments + localComments)}</ActionButton>
           <ActionButton type="share" onClick={handleShare}>Share</ActionButton>
         </div>
 

@@ -1,3 +1,5 @@
+$satellite: #e31c79;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,8 +16,16 @@
   line-height: 16px;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
   margin-top: 4px;
+
+  .active & {
+    color: $satellite;
+  }
 }
 
 .icon {
   filter: drop-shadow(0px 0.33px 4px rgba(0, 0, 0, 0.1));
+
+  .active & path {
+    fill: $satellite;
+  }
 }
