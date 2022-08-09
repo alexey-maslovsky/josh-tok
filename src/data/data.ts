@@ -66,49 +66,49 @@ const VIDEOS: Record<string, { src: string, names: string[] }> = {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/CS.mp4',
     names: ['Nadya Tuleyko'],
   },
-  [`3`]: {
+  [`4`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/export_1659626997860.mp4',
     names: ['Alina Chertkova', 'Kate Senkevich', 'Vlada Rudko'],
   },
-  [`3`]: {
+  [`5`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/HB.mp4',
-    names: [],
+    names: ['Anna Druzhinina', 'Maria Odinochenko'],
   },
-  [`3`]: {
+  [`6`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_1801.mp4',
-    names: [],
+    names: ['Anna Kovaleva'],
   },
-  [`3`]: {
+  [`7`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_4982.mp4',
-    names: [],
+    names: ['Denis Yankovec', 'Yulia Syritskaya', 'Alena Maenova', 'Ksenia Golovchik', 'Dmitry'],
   },
-  [`3`]: {
+  [`8`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_5792.mp4',
-    names: [],
+    names: ['Uliana Grechikha'],
   },
-  [`3`]: {
+  [`9`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_7232.mp4',
-    names: [],
+    names: ['Satellite kayakers'],
   },
-  [`3`]: {
+  [`10`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_E0595.mp4',
-    names: [],
+    names: ['Sergey Volosyuk'],
   },
-  [`3`]: {
+  [`11`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/Josh.mp4',
-    names: [],
+    names: ['Nikita Vushev', 'Nastya Chernyavskaya', 'Anna Kovaleva', 'Yaraslau Ilnitski', 'Mikhail Poddubsky', 'Dmitry Lonski'],
   },
-  [`3`]: {
+  [`12`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/petal_20220804_231143.mp4',
-    names: [],
+    names: ['Aleksandr Gordeychik'],
   },
-  [`3`]: {
+  [`13`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/VID_20220805_104603.mp4',
-    names: [],
+    names: ['Natalia Subramani'],
   },
-  [`3`]: {
+  [`14`]: {
     src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/WCteam1.mp4',
-    names: [],
+    names: ['Alina Klokel', 'Pavel Leshok', 'Zakhar Hurinovich', 'Alexandr Mysin', 'Eugene Yakubitsky', 'Viktoria Bogutskaya'],
   },
 };
 
