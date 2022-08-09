@@ -37,74 +37,84 @@ const getComments = (id: string) => {
 
 const VIDEOS: Record<string, { src: string, names: string[], tags: string[] }> = {
   [`1`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/-8333190523638727549.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/-8333190523638727549.mp4',
     names: ['Yana Aleksandrovich', 'Katerina Zaitsava'],
     tags: ['#happybirthday', '#friends', '#allthebest'],
   },
   [`2`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/alina_josh.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/alina_josh.mp4',
     names: ['Alina Klokel'],
     tags: ['#bestview', '#happybirthday'],
   },
   [`3`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/CS.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/CS.mp4',
     names: ['Nadya Tuleyko'],
     tags: ['#miamidream', '#greatsupport'],
   },
   [`4`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/export_1659626997860.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/export_1659626997860.mp4',
     names: ['Alina Chertkova', 'Kate Senkevich', 'Vlada Rudko'],
     tags: ['#bigtasty', '#satellite', '#egnircparty'],
   },
   [`5`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/HB.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/HB.mp4',
     names: ['Anna Druzhinina', 'Maria Odinochenko'],
     tags: ['#birthday', '#healthyandwealthy'],
   },
   [`6`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_1801.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/IMG_1801.mp4',
     names: ['Anna Kovaleva'],
     tags: ['#vicecity', '#birthdaycake', '#onthewaytomiami'],
   },
   [`7`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_4982.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/IMG_4982.mp4',
     names: ['Denis Yankovec', 'Yulia Syritskaya', 'Alena Maenova', 'Ksenia Golovchik', 'Dmitry'],
     tags: ['#brooklyn', '#happybirthday'],
   },
   [`8`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_5792.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/IMG_5792.mp4',
     names: ['Uliana Grechikha'],
     tags: ['#dreamscometrue', '#positive'],
   },
   [`9`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_7232.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/IMG_7232.mp4',
     names: ['Satellite kayakers'],
     tags: ['#corporateparty', '#satellitefamily'],
   },
   [`10`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/IMG_E0595.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/IMG_E0595.mp4',
     names: ['Sergey Volosyuk'],
     tags: [ '#noupdates', '#bestwishes'],
   },
   [`11`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/Josh.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/Josh.mp4',
     names: ['Nikita Vushev', 'Nastya Chernyavskaya', 'Anna Kovaleva', 'Yaraslau Ilnitski', 'Mikhail Poddubsky', 'Dmitry Lonski'],
     tags: ['#upsidedown', '#imnotbluedabudidabuda', '#dabudiiiiidabudaaaaa'],
   },
   [`12`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/petal_20220804_231143.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/petal_20220804_231143.mp4',
     names: ['Aleksandr Gordeychik'],
     tags: ['#italianovero', '#happybirthday'],
   },
   [`13`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/VID_20220805_104603.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/VID_20220805_104603.mp4',
     names: ['Natalia Subramani'],
     tags: ['#goodluck', '#smileandhavefun'],
   },
   [`14`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/WCteam1.mp4',
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/WCteam1.mp4',
     names: ['Alina Klokel', 'Pavel Leshok', 'Zakhar Hurinovich', 'Alexandr Mysin', 'Eugene Yakubitsky', 'Viktoria Bogutskaya'],
     tags: ['#longandamazinglife', '#workwithpleasure', '#happybirthday'],
+  },
+  [`15`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/Jenya.mp4',
+    names: ['Eugenia Vanderstarren'],
+    tags: ['#misterjosh', '#satelliteteam'],
+  },
+  [`16`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/Brad.mp4',
+    names: ['Bradley & William Vanderstarrens'],
+    tags: ['#cute', '#brother', '#birthdaysong'],
   },
 };
 
