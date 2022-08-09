@@ -29,8 +29,6 @@ const getIsVideoLiked = (id: string) => localStorage.getItem(getIsLikedKey(id)) 
 const getCommentsKey = (id: string) => `${id}/comments`;
 const getLocalComments = (id: string) => parseInt(localStorage.getItem(getCommentsKey(id)) || '', 10) || 0;
 
-const MOBILE_VIEW_BREAKPOINT = 500;
-
 const preloadedVideos: Record<string, string> = {};
 
 const Page = forwardRef<HTMLDivElement, PageProps>(({
@@ -49,7 +47,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [localComments, setLocalComments] = useState(getLocalComments(data.id));
   const [url, setUrl] = useState<string>();
 
-  const [wasActivated, setWasActivated] = useState(windowWidth >= MOBILE_VIEW_BREAKPOINT);
+  const [paused, setPaused] = useState(true);
 
   const { ref: inViewRef, inView } = useInView({ threshold: 0 });
 
@@ -78,11 +76,11 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   }, [data, inView]);
 
   const handlePlay = () => {
-    if (!videoRef.current) {
+    if (!videoRef.current || !url) {
       return;
     }
 
-    setWasActivated(true);
+    setPaused(!paused);
 
     if (!videoRef.current?.paused) {
       videoRef.current?.pause();
@@ -168,7 +166,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
 
         {showCopyToaster && <div className={styles.copyToaster}><span>Copied!</span></div>}
 
-        {!wasActivated && <div className={styles.playButtonContainer}>
+        {paused && <div className={clsx(styles.playButtonContainer, !url && styles.loadingPlayButtonContainer)}>
           <PlayButton />
         </div>}
       </>
