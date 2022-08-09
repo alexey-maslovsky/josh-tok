@@ -1,6 +1,11 @@
+@import "../node_modules/slick-carousel/slick/slick.css";
+@import "../node_modules/slick-carousel/slick/slick-theme.css";
+
 :root, body {
   margin: 0;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 body {

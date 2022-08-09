@@ -1,36 +1,56 @@
 import React, { FC, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import PAGES from '../../data/data';
 import Page from '../Page';
 import styles from './Main.module.scss';
+import Slider from 'react-slick';
 
 interface MainProps {
 }
 
-const SLIDES = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-]
-
 const Main: FC<MainProps> = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const handleSlideChange = (newIndex: number) => {
+    setActiveIndex(newIndex);
+  };
+
+  const normalizeIndex = (index: number) => {
+    return index < 0
+      ? PAGES.length + index
+      : index % PAGES.length;
+  };
+
+  const indexesToPreload = [
+    normalizeIndex(activeIndex - 1),
+    activeIndex,
+    normalizeIndex(activeIndex + 1),
+  ];
+
   return (
     <div className={styles.container}>
-      <Swiper
-        direction="vertical"
-        className={styles.swiper}
-        loop
-        longSwipes
-        onSlideChange={(context) => setActiveIndex(context.realIndex)}
+      <Slider
+        className={styles.slider}
+        vertical
+        verticalSwiping
+        slidesToShow={1}
+        infinite
+        arrows={false}
+        useCSS
+        afterChange={handleSlideChange}
+        cssEase="ease"
+        swipe
+        touchThreshold={4}
+        rows={1}
       >
-        {SLIDES.map(({ id }, index) => (
-          <SwiperSlide className={styles.slide} key={id}>
-            <Page playing={activeIndex === index} />
-          </SwiperSlide>
+        {PAGES.map((data, index) => (
+          <Page
+            key={data.id}
+            data={data}
+            active={index === activeIndex}
+            preload={indexesToPreload.includes(index)}
+          />
         ))}
-      </Swiper>
+      </Slider>
     </div>
   );
 };
