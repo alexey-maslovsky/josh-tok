@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import PAGES from '../../data/data';
 import Page from '../Page';
 import styles from './Main.module.scss';
@@ -7,17 +7,30 @@ import Slider from 'react-slick';
 interface MainProps {
 }
 
+const normalizeIndex = (index: number) => {
+  return index < 0
+    ? PAGES.length + index
+    : index % PAGES.length;
+};
+
+const getPageIndexFromHash = () => {
+  const idFromHash = window.location.hash.slice(1) || PAGES[0].id;
+
+  const page = PAGES.find(({ id }) => id === idFromHash);
+
+  if (!page) {
+    return 0;
+  }
+
+  return PAGES.indexOf(page);
+};
+
 const Main: FC<MainProps> = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(getPageIndexFromHash());
 
   const handleSlideChange = (newIndex: number) => {
     setActiveIndex(newIndex);
-  };
-
-  const normalizeIndex = (index: number) => {
-    return index < 0
-      ? PAGES.length + index
-      : index % PAGES.length;
+    window.location.hash = `${PAGES[newIndex].id}`;
   };
 
   const indexesToPreload = [
@@ -26,6 +39,10 @@ const Main: FC<MainProps> = () => {
     normalizeIndex(activeIndex + 1),
   ];
 
+  useEffect(() => {
+    window.location.hash = `${PAGES[activeIndex].id}`;
+  }, []);
+
   return (
     <div className={styles.container}>
       <Slider
@@ -33,6 +50,7 @@ const Main: FC<MainProps> = () => {
         vertical
         verticalSwiping
         slidesToShow={1}
+        initialSlide={activeIndex}
         infinite
         arrows={false}
         useCSS

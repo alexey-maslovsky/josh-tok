@@ -1,12 +1,13 @@
 import { useWindowSize } from '@react-hook/window-size';
 import clsx from 'clsx';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { IPageData } from '../../data/data';
 import Avatar from '../Avatar';
 import ActionButton from './ActionButton';
 import styles from './Page.module.scss';
 import PeopleBar from './PeopleBar';
 import SatelliteFamilyIconSrc from '../../static/satellite_family.jpg';
+import copy from 'copy-to-clipboard';
 
 interface PageProps {
   active: boolean;
@@ -29,6 +30,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
 }, ref) => {
   const [windowWidth, windowHeight] = useWindowSize();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [showCopyToaster, setShowCopyToaster] = useState(false);
 
   const handlePlay = () => {
     if (!videoRef.current) {
@@ -55,6 +57,13 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     }
   }, [active]);
 
+  const handleShare = () => {
+    if (!showCopyToaster && copy(window.location.href)) {
+      setShowCopyToaster(true);
+      setTimeout(() => setShowCopyToaster(false), 1000);
+    }
+  };
+
   const renderContent = () => {
     return (
       <>
@@ -68,13 +77,14 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
           preload="auto"
           style={{ width: windowWidth, height: windowHeight, objectFit: 'fill' }}
           key={data.id}
+          onClick={handlePlay}
         />
 
         <div className={styles.actionBar}>
           <Avatar src={SatelliteFamilyIconSrc} className={styles.avatar} />
           <ActionButton type="like">3612</ActionButton>
           <ActionButton type="comment">54</ActionButton>
-          <ActionButton type="share">Share</ActionButton>
+          <ActionButton type="share" onClick={handleShare}>Share</ActionButton>
         </div>
 
         <div className={styles.infoPanel}>
@@ -84,6 +94,8 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
         </div>
 
         <div className={styles.title}>Happy Birthday Josh</div>
+
+        {showCopyToaster && <div className={styles.copyToaster}><span>Copied!</span></div>}
       </>
     );
   };
@@ -92,7 +104,6 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     <div
       ref={ref}
       className={clsx(styles.container, className)}
-      onClick={handlePlay}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

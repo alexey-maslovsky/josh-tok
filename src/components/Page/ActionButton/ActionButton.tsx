@@ -11,18 +11,20 @@ interface ActionButtonProps {
   className?: string;
   type: ActionButtonType;
   children: string;
+  onClick?: () => void;
 }
 
 const ActionButton: FC<ActionButtonProps> = ({
   className,
   type,
   children,
+  onClick,
 }) => {
   return (
     <div className={clsx(styles.container, className)}>
-      {type === 'like' && <LikeIcon className={styles.icon} />}
-      {type === 'share' && <ShareIcon className={styles.icon} />}
-      {type === 'comment' && <CommentIcon className={styles.icon} />}
+      {type === 'like' && <LikeIcon className={styles.icon} onClick={onClick} />}
+      {type === 'share' && <ShareIcon className={styles.icon} onClick={onClick} />}
+      {type === 'comment' && <CommentIcon className={styles.icon} onClick={onClick} />}
       <div className={styles.text}>{children}</div>
     </div>
   );
