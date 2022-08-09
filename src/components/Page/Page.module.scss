@@ -83,3 +83,26 @@
   text-align: center;
   z-index: 99999;
 }
+
+.copyToaster {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s linear;
+
+  > span {
+    font-family: AppFontRegular;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #FFFFFF;
+    padding: 3px;
+  }
+}
