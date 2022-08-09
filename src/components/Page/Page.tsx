@@ -31,6 +31,8 @@ const getLocalComments = (id: string) => parseInt(localStorage.getItem(getCommen
 
 const MOBILE_VIEW_BREAKPOINT = 500;
 
+const preloadedVideos: Record<string, string> = {};
+
 const Page = forwardRef<HTMLDivElement, PageProps>(({
   active,
   preload,
@@ -45,12 +47,35 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [showCopyToaster, setShowCopyToaster] = useState(false);
   const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
   const [localComments, setLocalComments] = useState(getLocalComments(data.id));
+  const [url, setUrl] = useState<string>();
 
   const [wasActivated, setWasActivated] = useState(windowWidth >= MOBILE_VIEW_BREAKPOINT);
 
   const { ref: inViewRef, inView } = useInView({ threshold: 0 });
 
   const containerRef = useCombinedRefs<HTMLDivElement>(ref, inViewRef);
+
+  useEffect(() => {
+    if (!inView) {
+      return;
+    }
+
+    if (preloadedVideos[data.id]) {
+      setUrl(preloadedVideos[data.id]);
+
+      return;
+    }
+
+    fetch(data.videoSrc).then(async (res) => {
+      const blob = await res.blob();
+
+      const newUrl = URL.createObjectURL(blob);
+
+      preloadedVideos[data.id] = newUrl;
+
+      setUrl(newUrl);
+    });
+  }, [data, inView]);
 
   const handlePlay = () => {
     if (!videoRef.current) {
@@ -106,7 +131,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       <>
         <video
           ref={videoRef}
-          src={data.videoSrc}
+          src={url}
           loop
           controls={false}
           playsInline
@@ -162,7 +187,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       {inView && <Portal>
         <div className={styles.videoBackground}>
           <video
-            src={data.videoSrc}
+            src={url}
             loop
             autoPlay
             muted
