@@ -1,3 +1,5 @@
+import shuffle from 'lodash.shuffle';
+
 export interface IPageData {
   id: string;
   videoSrc: string;
@@ -118,7 +120,7 @@ const VIDEOS: Record<string, { src: string, names: string[], tags: string[] }> =
   },
 };
 
-const PAGES: IPageData[] = Object.keys(VIDEOS).map((key) => {
+const PAGES: IPageData[] = shuffle(Object.keys(VIDEOS).map((key) => {
   return {
     id: key,
     videoSrc: VIDEOS[key].src,
@@ -127,6 +129,6 @@ const PAGES: IPageData[] = Object.keys(VIDEOS).map((key) => {
     tags: VIDEOS[key].tags,
     names: VIDEOS[key].names,
   };
-});
+}));
 
 export default PAGES;
