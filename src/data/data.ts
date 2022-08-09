@@ -63,7 +63,7 @@ const VIDEOS: Record<string, { src: string, names: string[] }> = {
     names: ['Alina Klokel'],
   },
   [`3`]: {
-    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/CS.mp4',\
+    src: 'https://266311286062-us-east-1-joshbirthday.s3.amazonaws.com/videos/CS.mp4',
     names: ['Nadya Tuleyko'],
   },
   [`3`]: {
