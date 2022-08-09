@@ -45,30 +45,32 @@ const Main: FC<MainProps> = () => {
 
   return (
     <div className={styles.container}>
-      <Slider
-        className={styles.slider}
-        vertical
-        verticalSwiping
-        slidesToShow={1}
-        initialSlide={activeIndex}
-        infinite
-        arrows={false}
-        useCSS
-        afterChange={handleSlideChange}
-        cssEase="ease"
-        swipe
-        touchThreshold={4}
-        rows={1}
-      >
-        {PAGES.map((data, index) => (
-          <Page
-            key={data.id}
-            data={data}
-            active={index === activeIndex}
-            preload={indexesToPreload.includes(index)}
-          />
-        ))}
-      </Slider>
+      <div className={styles.innerContainer}>
+        <Slider
+          className={styles.slider}
+          vertical
+          verticalSwiping
+          slidesToShow={1}
+          initialSlide={activeIndex}
+          infinite
+          arrows={false}
+          useCSS
+          afterChange={handleSlideChange}
+          cssEase="ease"
+          swipe
+          touchThreshold={4}
+          rows={1}
+        >
+          {PAGES.map((data, index) => (
+            <Page
+              key={data.id}
+              data={data}
+              active={index === activeIndex}
+              preload={indexesToPreload.includes(index)}
+            />
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };

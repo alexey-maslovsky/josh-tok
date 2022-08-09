@@ -1,12 +1,16 @@
 import { useWindowSize } from '@react-hook/window-size';
+import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { IPageData } from '../../data/data';
 import Avatar from '../Avatar';
 import ActionButton from './ActionButton';
-import styles from './Page.module.scss';
 import PeopleBar from './PeopleBar';
 import SatelliteFamilyIconSrc from '../../static/satellite_family.jpg';
+import { ReactComponent as PlayButton } from './icons/play-button.svg';
+import useCombinedRefs from '../../hooks/useCombinedRefs';
+import Portal from '../Portal';
+import styles from './Page.module.scss';
 import copy from 'copy-to-clipboard';
 
 interface PageProps {
@@ -25,6 +29,8 @@ const getIsVideoLiked = (id: string) => localStorage.getItem(getIsLikedKey(id)) 
 const getCommentsKey = (id: string) => `${id}/comments`;
 const getLocalComments = (id: string) => parseInt(localStorage.getItem(getCommentsKey(id)) || '', 10) || 0;
 
+const MOBILE_VIEW_BREAKPOINT = 500;
+
 const Page = forwardRef<HTMLDivElement, PageProps>(({
   active,
   preload,
@@ -40,10 +46,18 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
   const [localComments, setLocalComments] = useState(getLocalComments(data.id));
 
+  const [wasActivated, setWasActivated] = useState(windowWidth >= MOBILE_VIEW_BREAKPOINT);
+
+  const { ref: inViewRef, inView } = useInView({ threshold: 0 });
+
+  const containerRef = useCombinedRefs<HTMLDivElement>(ref, inViewRef);
+
   const handlePlay = () => {
     if (!videoRef.current) {
       return;
     }
+
+    setWasActivated(true);
 
     if (!videoRef.current?.paused) {
       videoRef.current?.pause();
@@ -57,13 +71,13 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       return;
     }
 
-    if (active) {
+    if (active && inView) {
       videoRef.current.play();
     } else {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
-  }, [active]);
+  }, [active, inView]);
 
   const handleShare = () => {
     if (!showCopyToaster && copy(window.location.href)) {
@@ -93,7 +107,6 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       <>
         <video
           ref={videoRef}
-          className={styles.video}
           src={data.videoSrc}
           loop
           controls={false}
@@ -130,19 +143,38 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
         <div className={styles.title}>Happy Birthday Josh</div>
 
         {showCopyToaster && <div className={styles.copyToaster}><span>Copied!</span></div>}
+
+        {!wasActivated && <div className={styles.playButtonContainer}>
+          <PlayButton />
+        </div>}
       </>
     );
   };
 
   return (
     <div
-      ref={ref}
+      ref={containerRef}
       className={clsx(styles.container, className)}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
       style={{ height: `${windowHeight}px` }}
     >
+      {inView && <Portal>
+        <div className={styles.videoBackground}>
+          <video
+            src={data.videoSrc}
+            loop
+            autoPlay
+            muted
+            controls={false}
+            playsInline
+            preload="auto"
+            style={{ width: windowWidth, height: windowHeight, objectFit: 'fill' }}
+            key={data.id}
+          />
+        </div>
+      </Portal>}
       {(active || preload) && renderContent()}
     </div>
   );
