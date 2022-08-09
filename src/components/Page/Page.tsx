@@ -123,8 +123,8 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
 
         <div className={styles.infoPanel}>
           <div className={styles.author}>@satellite_family</div>
-          <div className={styles.description}>#love #happybirthday #josh #satelliteteam</div>
-          <PeopleBar>{'Alex Maslovsky, Vlad Perost, Glad Propulk, Mister Mac Merik, '}</PeopleBar>
+          <div className={styles.description}>{data.tags.map((x) => `#${x}`).join(' ')}</div>
+          <PeopleBar>{data.names.join(' ')}</PeopleBar>
         </div>
 
         <div className={styles.title}>Happy Birthday Josh</div>
