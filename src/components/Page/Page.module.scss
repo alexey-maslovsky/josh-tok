@@ -116,8 +116,9 @@
 }
 
 .playButtonContainer {
+  pointer-events: none;
   position: absolute;
   z-index: 100;
-  width: 100px;
-  height: 100px;
+  width: 64px;
+  height: 64px;
 }
