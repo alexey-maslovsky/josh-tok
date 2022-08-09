@@ -75,6 +75,12 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     });
   }, [data, inView]);
 
+  useEffect(() => {
+    if (!inView) {
+      setPaused(true);
+    }
+  }, [inView]);
+
   const handlePlay = () => {
     if (!videoRef.current || !url) {
       return;
