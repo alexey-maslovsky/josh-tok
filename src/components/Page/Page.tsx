@@ -113,7 +113,11 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
           >
             {String(data.likes + (isLiked ? 1 : 0))}
           </ActionButton>
-          <ActionButton type="comment" onClick={() => updateLocalComments(data.id)}>{String(data.comments + localComments)}</ActionButton>
+          <ActionButton type="comment"
+            onClick={() => updateLocalComments(data.id)}
+          >
+              {String(localComments)}
+          </ActionButton>
           <ActionButton type="share" onClick={handleShare}>Share</ActionButton>
         </div>
 
