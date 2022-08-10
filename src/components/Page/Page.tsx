@@ -46,12 +46,31 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
   const [localComments, setLocalComments] = useState(getLocalComments(data.id));
   const [url, setUrl] = useState<string>();
+  const clicksRef = useRef<{
+    clicksCount: number;
+    lastClickTime: Date;
+    audioPlayings: number;
+  }>({
+    clicksCount: 0,
+    audioPlayings: 0,
+    lastClickTime: new Date(),
+  });
 
   const [paused, setPaused] = useState(true);
 
   const { ref: inViewRef, inView } = useInView({ threshold: 0 });
 
   const containerRef = useCombinedRefs<HTMLDivElement>(ref, inViewRef);
+
+  useEffect(() => {
+    return () => {
+      if (inView) {
+        clicksRef.current.clicksCount = 0;
+        clicksRef.current.lastClickTime = new Date();
+        clicksRef.current.audioPlayings = 0;
+      }
+    };
+  }, [inView]);
 
   useEffect(() => {
     if (!inView) {
@@ -82,6 +101,26 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   }, [inView]);
 
   const handlePlay = () => {
+    if ((new Date().getTime() - clicksRef.current.lastClickTime.getTime()) > 1000) {
+      clicksRef.current.clicksCount = 0;
+      clicksRef.current.lastClickTime = new Date();
+    }
+
+    clicksRef.current.clicksCount += 1;
+
+    if (clicksRef.current.clicksCount === 3) {
+      const audio = new Audio(clicksRef.current.audioPlayings !== 0 && clicksRef.current.audioPlayings % 5 === 0
+        ? 'isaidstopthat.m4a'
+        : 'stopthat.mp3',
+      );
+
+      audio.play();
+
+      clicksRef.current.clicksCount = 0;
+      clicksRef.current.lastClickTime = new Date();
+      clicksRef.current.audioPlayings += 1;
+    }
+
     if (!videoRef.current || !url) {
       return;
     }
