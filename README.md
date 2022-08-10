@@ -48,15 +48,18 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Build and push into ECR
 
+```
 export AWS_ACCOUNT_ID=
 export AWS_REGION=us-east-1
 export ECR_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 export IMAGE_TAG=v0.0.1
 export IMAGE_NAME=josh-tok
+```
 
-docker build -t $ECR_URL/$IMAGE_NAME:$IMAGE_TAG --no-cache -f Dockerfile .
+```docker build -t $ECR_URL/$IMAGE_NAME:$IMAGE_TAG --no-cache -f Dockerfile .
 aws ecr get-login-password --region $AWS_REGION | sudo docker login --username AWS --password-stdin $ECR_URL
 sudo docker push $ECR_URL/$IMAGE_NAMEk:$IMAGE_TAG
+```
 
 ## Deploy to kubernetes
-kubectl apply -f deploy.yaml --namespace josh-tok-com 
+```kubectl apply -f deploy.yaml --namespace josh-tok-com```
