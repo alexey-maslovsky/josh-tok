@@ -100,7 +100,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     }
   }, [inView]);
 
-  const handlePlay = () => {
+  const handleClick = () => {
     if ((new Date().getTime() - clicksRef.current.lastClickTime.getTime()) > 1000) {
       clicksRef.current.clicksCount = 0;
       clicksRef.current.lastClickTime = new Date();
@@ -120,6 +120,10 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       clicksRef.current.lastClickTime = new Date();
       clicksRef.current.audioPlayings += 1;
     }
+  };
+
+  const handlePlay = () => {
+    handleClick();
 
     if (!videoRef.current || !url) {
       return;
@@ -172,6 +176,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const renderContent = () => {
     return (
       <>
+        {!url && <div className={styles.mask} onClick={handleClick} />}
         <video
           ref={videoRef}
           src={url}
