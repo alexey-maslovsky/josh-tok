@@ -135,18 +135,53 @@ const VIDEOS: Record<string, { src: string, names: string[], tags: string[]; bac
     names: ['Bradley & William Vanderstarrens'],
     tags: ['#cute', '#brother', '#birthdaysong'],
   },
+  [`17`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/alex_dima.mp4',
+    backgroundSrc: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/compressed/alex_dima.mp4',
+    names: ['Alexey Maslovsky', 'Dmitry Kozlovksy'],
+    tags: ['#heyjosh', '#happybirthday', '#wow'],
+  },
+  [`18`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/dima_hide.mp4',
+    backgroundSrc: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/compressed/dima_hide.mp4',
+    names: ['Dmitry Kozlovksy'],
+    tags: ['#heyjosh', '#happybirthday', '#wow'],
+  },
+  [`19`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/dima_parkour.mp4',
+    backgroundSrc: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/compressed/dima_parkour.mp4',
+    names: ['Dmitry Kozlovksy'],
+    tags: ['#heyjosh', '#happybirthday', '#wow'],
+  },
+  [`20`]: {
+    src: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/JHB.mp4',
+    backgroundSrc: 'https://266311286062-us-east-1-joshbirthday.s3-accelerate.amazonaws.com/videos/compressed/JHB.mp4',
+    names: ['Satellite Family', 'Robot Voice'],
+    tags: ['#robot', '#intro', '#russianaccent'],
+  },
 };
 
-const PAGES: IPageData[] = shuffle(Object.keys(VIDEOS).map((key) => {
-  return {
-    id: key,
-    videoSrc: VIDEOS[key].src,
-    backgroundVideoSrc: VIDEOS[key].backgroundSrc,
-    comments: getComments(key),
-    likes: getLikes(key),
-    tags: VIDEOS[key].tags,
-    names: VIDEOS[key].names,
-  };
-}));
+const PAGES: IPageData[] = [
+  {
+    id: '20',
+    videoSrc: VIDEOS['20'].src,
+    backgroundVideoSrc: VIDEOS['20'].backgroundSrc,
+    comments: getComments('20'),
+    likes: getLikes('20'),
+    tags: VIDEOS['20'].tags,
+    names: VIDEOS['20'].names,
+  },
+  ...shuffle(Object.keys(VIDEOS).slice(0, -1).map((key) => {
+    return {
+      id: key,
+      videoSrc: VIDEOS[key].src,
+      backgroundVideoSrc: VIDEOS[key].backgroundSrc,
+      comments: getComments(key),
+      likes: getLikes(key),
+      tags: VIDEOS[key].tags,
+      names: VIDEOS[key].names,
+    };
+  })),
+];
 
 export default PAGES;
