@@ -46,6 +46,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   const [isLiked, setLiked] = useState(getIsVideoLiked(data.id));
   const [localComments, setLocalComments] = useState(getLocalComments(data.id));
   const [url, setUrl] = useState<string>();
+  const [backUrl, setBackUrl] = useState<string>();
   const clicksRef = useRef<{
     clicksCount: number;
     lastClickTime: Date;
@@ -72,26 +73,35 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
     };
   }, [inView]);
 
-  useEffect(() => {
-    if (!inView) {
+  const loadVideo = (src: string, callback: (loadedUrl: string) => void) => {
+    if (!src) {
       return;
     }
 
-    if (preloadedVideos[data.id]) {
-      setUrl(preloadedVideos[data.id]);
-
-      return;
+    if (preloadedVideos[src]) {
+      return callback(preloadedVideos[src]);
     }
 
     fetch(data.videoSrc).then(async (res) => {
       const blob = await res.blob();
 
-      const newUrl = URL.createObjectURL(blob);
+      const loadedUrl = URL.createObjectURL(blob);
 
-      preloadedVideos[data.id] = newUrl;
+      preloadedVideos[src] = loadedUrl;
 
-      setUrl(newUrl);
+      callback(loadedUrl);
     });
+  };
+
+  useEffect(() => {
+    if (!inView) {
+      return;
+    }
+
+    console.log(data.backgroundVideoSrc);
+
+    loadVideo(data.videoSrc, (loadedUrl) => setUrl(loadedUrl));
+    loadVideo(data.backgroundVideoSrc, (loadedUrl) => setBackUrl(loadedUrl));
   }, [data, inView]);
 
   useEffect(() => {
@@ -235,7 +245,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
       {inView && <Portal>
         <div className={styles.videoBackground}>
           <video
-            src={url}
+            src={backUrl}
             loop
             autoPlay
             muted
@@ -252,4 +262,4 @@ const Page = forwardRef<HTMLDivElement, PageProps>(({
   );
 });
 
-export default Page;
+export default React.memo(Page);
